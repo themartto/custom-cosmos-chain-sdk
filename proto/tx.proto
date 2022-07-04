@@ -1,0 +1,88 @@
+syntax = "proto3";
+package LimeChain.mantrachain.mdb.v1;
+
+import "google/protobuf/any.proto";
+import "nft_collection.proto";
+import "nft.proto";
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "github.com/LimeChain/mantrachain/x/mdb/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc CreateNftCollection(MsgCreateNftCollection) returns (MsgCreateNftCollectionResponse);
+  rpc MintNfts(MsgMintNfts) returns (MsgMintNftsResponse);
+  rpc BurnNfts(MsgBurnNfts) returns (MsgBurnNftsResponse);
+  // this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgCreateNftCollection {
+  string creator = 1;
+  MsgCreateNftCollectionMetadata collection = 2;
+  string pub_key_hex = 3;
+  string pub_key_type = 4;
+}
+
+message MsgCreateNftCollectionMetadata {
+  string id = 1;
+  string name = 2;
+  repeated NftCollectionImage images = 3;
+  string url = 4;
+  string description = 5;
+  repeated NftCollectionLink links = 6;
+  repeated NftCollectionOption options = 7;
+  string category = 8;
+  string symbol = 9;
+  bool opened = 10;
+  google.protobuf.Any data = 11;
+}
+
+message MsgCreateNftCollectionResponse {
+  string id = 1;
+}
+
+message MsgMintNfts {
+  string creator = 1;
+  string collection_creator = 2;
+  string collection_id = 3;
+  MsgNftsMetadata nfts = 4;
+  string pub_key_hex = 5;
+  string pub_key_type = 6;
+}
+
+message MsgNftsMetadata {
+  repeated MsgNftMetadata nfts = 1;
+}
+
+message MsgNftMetadata {
+  string id = 1;
+  string title = 2;
+  repeated NftImage images = 3;
+  string url = 4;
+  string description = 5;
+  repeated NftLink links = 6;
+  repeated NftAttribute attributes = 7;
+  google.protobuf.Any data = 8;
+  bool resellable = 9;
+}
+
+message MsgMintNftsResponse {
+  repeated string ids = 1;
+}
+
+message MsgBurnNfts {
+  string creator = 1;
+  string collection_creator = 2;
+  string collection_id = 3;
+  MsgNftsIds nfts = 4;
+  string pub_key_hex = 5;
+  string pub_key_type = 6;
+}
+
+message MsgNftsIds {
+  repeated string nfts_ids = 1;
+}
+
+message MsgBurnNftsResponse {
+  repeated string ids = 1;
+}
