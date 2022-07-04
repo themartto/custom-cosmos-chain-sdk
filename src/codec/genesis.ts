@@ -8,7 +8,7 @@ export const protobufPackage = "LimeChain.mantrachain.mdb.v1";
 /** GenesisState defines the mdb module's genesis state. */
 export interface GenesisState {
   /** this line is used by starport scaffolding # genesis/proto/state */
-  params: Params;
+  params?: Params;
 }
 
 function createBaseGenesisState(): GenesisState {

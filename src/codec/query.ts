@@ -18,7 +18,7 @@ export interface QueryParamsRequest {}
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params holds all the parameters of this module. */
-  params: Params;
+  params?: Params;
 }
 
 export interface QueryGetNftCollectionRequest {
@@ -40,7 +40,7 @@ export interface QueryGetNftCollectionResponse {
   owner: string;
   creator: string;
   opened: boolean;
-  data: Any;
+  data?: Any;
 }
 
 export interface QueryGetNftRequest {
@@ -60,7 +60,7 @@ export interface QueryGetNftResponse {
   attributes: NftAttribute[];
   owner: string;
   creator: string;
-  data: Any;
+  data?: Any;
   collectionId: string;
   resellable: boolean;
 }

@@ -11,5 +11,13 @@
     "skipLibCheck": true,                                /* Skip type checking all .d.ts files. */
     "declaration": true,                                 /* Generate d.ts files */
     "noImplicitAny": false,
-  }
+  },
+  "include": [
+    "./**/*.ts"
+  ],                   
+  "exclude": [
+    "./src/examples/**", 
+    "./src/codec/google/**", 
+    "./src/proto/gogoproto/**"
+  ],
 }
