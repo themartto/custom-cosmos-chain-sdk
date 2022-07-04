@@ -13,23 +13,23 @@ export const protobufPackage = "LimeChain.mantrachain.mdb.v1";
 
 export interface MsgCreateNftCollection {
   creator: string;
-  collection: MsgCreateNftCollectionMetadata;
+  collection?: MsgCreateNftCollectionMetadata;
   pubKeyHex: string;
   pubKeyType: string;
 }
 
 export interface MsgCreateNftCollectionMetadata {
   id: string;
-  name: string;
-  images: NftCollectionImage[];
-  url: string;
-  description: string;
-  links: NftCollectionLink[];
-  options: NftCollectionOption[];
-  category: string;
-  symbol: string;
-  opened: boolean;
-  data: Any;
+  name?: string;
+  images?: NftCollectionImage[];
+  url?: string;
+  description?: string;
+  links?: NftCollectionLink[];
+  options?: NftCollectionOption[];
+  category?: string;
+  symbol?: string;
+  opened?: boolean;
+  data?: Any;
 }
 
 export interface MsgCreateNftCollectionResponse {
@@ -40,7 +40,7 @@ export interface MsgMintNfts {
   creator: string;
   collectionCreator: string;
   collectionId: string;
-  nfts: MsgNftsMetadata;
+  nfts?: MsgNftsMetadata;
   pubKeyHex: string;
   pubKeyType: string;
 }
@@ -57,7 +57,7 @@ export interface MsgNftMetadata {
   description: string;
   links: NftLink[];
   attributes: NftAttribute[];
-  data: Any;
+  data?: Any;
   resellable: boolean;
 }
 
@@ -69,7 +69,7 @@ export interface MsgBurnNfts {
   creator: string;
   collectionCreator: string;
   collectionId: string;
-  nfts: MsgNftsIds;
+  nfts?: MsgNftsIds;
   pubKeyHex: string;
   pubKeyType: string;
 }
@@ -205,28 +205,28 @@ export const MsgCreateNftCollectionMetadata = {
       writer.uint32(10).string(message.id);
     }
     if (message.name !== "") {
-      writer.uint32(18).string(message.name);
+      writer.uint32(18).string(message.name!);
     }
-    for (const v of message.images) {
+    for (const v of message.images!) {
       NftCollectionImage.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.url !== "") {
-      writer.uint32(34).string(message.url);
+      writer.uint32(34).string(message.url!);
     }
     if (message.description !== "") {
-      writer.uint32(42).string(message.description);
+      writer.uint32(42).string(message.description!);
     }
-    for (const v of message.links) {
+    for (const v of message.links!) {
       NftCollectionLink.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-    for (const v of message.options) {
+    for (const v of message.options!) {
       NftCollectionOption.encode(v!, writer.uint32(58).fork()).ldelim();
     }
     if (message.category !== "") {
-      writer.uint32(66).string(message.category);
+      writer.uint32(66).string(message.category!);
     }
     if (message.symbol !== "") {
-      writer.uint32(74).string(message.symbol);
+      writer.uint32(74).string(message.symbol!);
     }
     if (message.opened === true) {
       writer.uint32(80).bool(message.opened);
@@ -254,7 +254,7 @@ export const MsgCreateNftCollectionMetadata = {
           message.name = reader.string();
           break;
         case 3:
-          message.images.push(
+          message.images!.push(
             NftCollectionImage.decode(reader, reader.uint32())
           );
           break;
@@ -265,10 +265,10 @@ export const MsgCreateNftCollectionMetadata = {
           message.description = reader.string();
           break;
         case 6:
-          message.links.push(NftCollectionLink.decode(reader, reader.uint32()));
+          message.links!.push(NftCollectionLink.decode(reader, reader.uint32()));
           break;
         case 7:
-          message.options.push(
+          message.options!.push(
             NftCollectionOption.decode(reader, reader.uint32())
           );
           break;

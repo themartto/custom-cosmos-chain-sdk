@@ -1,6 +1,6 @@
-import {Registry} from "@cosmjs/proto-signing";
-import {defaultRegistryTypes as defaultStargateTypes} from "@cosmjs/stargate/build/signingstargateclient";
-import {MsgCreateNftCollection, MsgCreateNftCollectionMetadata} from "../codec/tx";
+import { Registry } from "@cosmjs/proto-signing";
+import { defaultRegistryTypes as defaultStargateTypes } from "@cosmjs/stargate/build/signingstargateclient";
+import { MsgCreateNftCollection, MsgCreateNftCollectionMetadata } from "../codec/tx";
 
 export default class MantraChain {
 

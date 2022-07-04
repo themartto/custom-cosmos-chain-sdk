@@ -1,32 +1,27 @@
-import {DeliverTxResponse, SigningStargateClient} from "@cosmjs/stargate";
-import {MsgCreateNftCollection, MsgCreateNftCollectionMetadata} from "../../codec/tx";
-import {EncodeObject} from "@cosmjs/proto-signing";
+import { DeliverTxResponse, SigningStargateClient } from "@cosmjs/stargate";
+import { DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
+import { MsgCreateNftCollection, MsgCreateNftCollectionMetadata } from "../../codec/tx";
+import { EncodeObject } from "@cosmjs/proto-signing";
 
 export default class MdbModule {
     constructor(
         private readonly client: SigningStargateClient,
+        private readonly wallet: DirectSecp256k1HdWallet,
         public urls: Map<string, string>
-    ) {}
+    ) { }
 
-    public async createCollection(address: string, name: string): Promise<DeliverTxResponse> {
-        // @ts-ignore
+    public async createCollection(meta: MsgCreateNftCollectionMetadata): Promise<DeliverTxResponse> {
+        const [creator] = await this.wallet.getAccounts();
+
+        const pubKeyBytes = Buffer.from(creator.pubkey).toString('hex');
+
         const message: EncodeObject = {
-            typeUrl: this.urls.get("MsgCreateNftCollection"),
+            typeUrl: this.urls.get("MsgCreateNftCollection")!,
             value: MsgCreateNftCollection.fromPartial({
-                pubKeyType: "",
-                pubKeyHex: "",
-                collection:{
-                    id: "id1",
-                    name: "test1",
-                    description: "test1",
-                    category: "music",
-                    url: "http://xxx.yyy",
-                    images: [{
-                        type: "x",
-                        url: "http://xxx.zzz"
-                    }]
-                } as MsgCreateNftCollectionMetadata,
-                creator: "cosmos16wtg70d2ulvaeenng6x7nkk2spnfhm9u0vweh0",
+                pubKeyType: creator.algo,
+                pubKeyHex: `F${pubKeyBytes}`,
+                collection: meta,
+                creator: creator.address,
             })
         };
 
@@ -40,6 +35,6 @@ export default class MdbModule {
             gas: "auto",
         };
 
-        return await this.client.signAndBroadcast(address, [message], "auto");
+        return await this.client.signAndBroadcast(creator.address, [message], "auto");
     }
 }

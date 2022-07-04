@@ -1,7 +1,7 @@
-import {SDK, MantraChain} from "./sdk";
+import { SDK, MantraChain } from "./sdk";
 import { DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
-import {GasPrice, SigningStargateClient} from "@cosmjs/stargate";
-import {Decimal} from "@cosmjs/math";
+import { GasPrice, SigningStargateClient } from "@cosmjs/stargate";
+import { Decimal } from "@cosmjs/math";
 
 const addressesPrefix = "cosmos";
 
@@ -15,18 +15,22 @@ export class SDKFactory {
             { prefix: addressesPrefix }
         );
 
+        const registry = chainSpecification.getRegistry()
+        const gasPrice = new GasPrice(Decimal.fromUserInput("0", 2), "stake")
+
         const client = await SigningStargateClient.connectWithSigner(
             url,
             signer,
             {
-                registry: chainSpecification.getRegistry(),
-                gasPrice: new GasPrice(Decimal.fromUserInput("0", 2), "stake"),
+                registry,
+                gasPrice,
             }
         )
 
         return new SDK(
             client,
+            signer,
             chainSpecification.getAllUrs()
-            );
+        );
     }
 }
