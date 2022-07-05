@@ -2,7 +2,7 @@ import { DeliverTxResponse, SigningStargateClient } from "@cosmjs/stargate";
 import { DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { MsgCreateNftCollection, MsgCreateNftCollectionMetadata, MsgNftsMetadata, MsgMintNfts } from "../../codec/tx";
 import { EncodeObject } from "@cosmjs/proto-signing";
-import { Query, QueryGetNftCollectionResponse, QueryGetNftCollectionsResponse } from "../../codec/query";
+import { Query, QueryGetNftCollectionResponse, QueryGetNftCollectionsResponse, QueryGetCollectionNftsResponse } from "../../codec/query";
 
 export default class MdbModule {
     constructor(
@@ -59,5 +59,9 @@ export default class MdbModule {
 
     public async getNftCollections(creator: string): Promise<QueryGetNftCollectionsResponse> {
         return this.query.NftCollections({ creator })
+    }
+
+    public async getCollectionNfts(collectionCreator: string, collectionId: string): Promise<QueryGetCollectionNftsResponse> {
+        return this.query.CollectionNfts({ collectionCreator, collectionId })
     }
 }
