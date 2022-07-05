@@ -1,6 +1,13 @@
 import { Registry } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes as defaultStargateTypes } from "@cosmjs/stargate/build/signingstargateclient";
-import { MsgCreateNftCollection, MsgCreateNftCollectionMetadata } from "../codec/tx";
+import {
+    MsgCreateNftCollection,
+    MsgCreateNftCollectionMetadata,
+    MsgMintNfts,
+    MsgNftsMetadata,
+    MsgNftMetadata,
+    MsgBurnNfts
+} from "../codec/tx";
 
 export default class MantraChain {
 
@@ -22,16 +29,46 @@ export default class MantraChain {
     }
 
     registerMdbModule() {
+        // CreateCollection
         this.registry.register(
             "/LimeChain.mantrachain.mdb.v1.MsgCreateNftCollection",
             MsgCreateNftCollection,
         );
         this.urls.set("MsgCreateNftCollection", "/LimeChain.mantrachain.mdb.v1.MsgCreateNftCollection");
 
+        // CreateCollectionMetadata
         this.registry.register(
             "/LimeChain.mantrachain.mdb.v1.MsgCreateNftCollectionMetadata",
             MsgCreateNftCollectionMetadata,
         );
         this.urls.set("MsgCreateNftCollectionMetadata", "/LimeChain.mantrachain.mdb.v1.MsgCreateNftCollectionMetadata");
+
+        // MintNfts
+        this.registry.register(
+            "/LimeChain.mantrachain.mdb.v1.MsgMintNfts",
+            MsgMintNfts,
+        );
+        this.urls.set("MsgMintNfts", "/LimeChain.mantrachain.mdb.v1.MsgMintNfts");
+
+        // NftsMetadata
+        this.registry.register(
+            "/LimeChain.mantrachain.mdb.v1.MsgNftsMetadata",
+            MsgNftsMetadata,
+        );
+        this.urls.set("MsgNftsMetadata", "/LimeChain.mantrachain.mdb.v1.MsgNftsMetadata");
+
+        // NftMetadata
+        this.registry.register(
+            "/LimeChain.mantrachain.mdb.v1.MsgNftMetadata",
+            MsgNftMetadata,
+        );
+        this.urls.set("MsgNftMetadata", "/LimeChain.mantrachain.mdb.v1.MsgNftMetadata");
+
+        // BurnNfts
+        this.registry.register(
+            "/LimeChain.mantrachain.mdb.v1.MsgBurnNfts",
+            MsgBurnNfts,
+        );
+        this.urls.set("MsgBurnNfts", "/LimeChain.mantrachain.mdb.v1.MsgBurnNfts");
     }
 }

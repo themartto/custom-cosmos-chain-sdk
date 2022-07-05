@@ -1,2 +1,3 @@
 export { SDKFactory } from "./src"
-export { MsgCreateNftCollectionMetadata } from "./src/codec/tx"
+export { MsgCreateNftCollectionMetadata, MsgNftsMetadata } from "./src/codec/tx"
+export { QueryGetNftCollectionResponse, QueryGetNftCollectionsResponse } from "./src/codec/query";
