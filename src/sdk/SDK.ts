@@ -10,6 +10,6 @@ export default class SDK {
         private readonly wallet: DirectSecp256k1HdWallet,
         private readonly urls: Map<string, string>
     ) {
-        this.mdbModule = new MdbModule(this.client, this.wallet, this.urls);
+        this.mdbModule = new MdbModule(this.client, this.urls);
     }
 }

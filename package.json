@@ -14,7 +14,7 @@
     "url": ""
   },
   "scripts": {
-    "build": "rimraf ./dist && tsc",
+    "build": "tsc",
     "test": ""
   },
   "dependencies": {

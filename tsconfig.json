@@ -14,10 +14,11 @@
   },
   "include": [
     "./**/*.ts"
-  ],                   
+  ],
   "exclude": [
-    "./src/examples/**", 
-    "./src/codec/google/**", 
-    "./src/proto/gogoproto/**"
+    "./src/examples/**",
+    "./src/codec/google/**",
+    "./src/proto/gogoproto/**",
+    "./dist/**"
   ],
 }
