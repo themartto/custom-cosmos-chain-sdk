@@ -1,5 +1,5 @@
 {
-  "name": "sdk",
+  "name": "mantrachain-sdk",
   "version": "0.1.0",
   "description": "SDK for cosmos blockchains interactions",
   "author": "LimeChain",

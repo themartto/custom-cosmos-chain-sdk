@@ -16,7 +16,7 @@
     "./**/*.ts"
   ],                   
   "exclude": [
-    "./src/examples/**", 
+    "examples", 
     "./src/codec/google/**", 
     "./src/proto/gogoproto/**"
   ],
