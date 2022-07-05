@@ -32,8 +32,8 @@ const start = async () => {
                     url: "http://xxx.zzz"
                 }]
             })
+        console.log(a)
 
-        console.log(a.transactionHash)
         const nftLink: NftLink = {type: "http", url: "http://xxx.xxx"};
         const nftImage: NftImage = {type: "http", url: "http://xxx.xxx"};
         const nftAttribute: NftAttribute = {
@@ -57,22 +57,21 @@ const start = async () => {
             nfts: [nftMetadata]
         };
 
-        console.log(nftss.nfts.length)
-
         const b = await sdk.mdbModule.mintNfts(
             signer,
             ID,
             nftss
         )
+        console.log(b)
 
-        console.log(b.transactionHash)
         const [acc] = await signer.getAccounts();
-        const c = await sdk.mdbModule.getNftCollection(acc.address, "id14")
+        const c = await sdk.mdbModule.getNftCollection(acc.address, ID)
         console.log(c)
 
 
         const d = await sdk.mdbModule.getNftCollections(acc.address);
         console.log(d)
+
     } catch (e) {
         console.error(e)
     }
