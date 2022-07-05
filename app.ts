@@ -6,7 +6,7 @@ import {NftAttribute, NftImage, NftLink} from "./src/codec/nft";
 const start = async () => {
 
     try {
-        const mnemonic = "lobster session indicate between funny inherit sentence old ready party basket brand calm focus burger element upset word unfold tissue task romance artwork easily";
+        const mnemonic = "egg idle one route enforce core essence badge report fantasy finish add ride access basket hotel nasty shield noodle toward dance trust weird frog";
 
         const sdk = await SDKFactory.init(
             "http://127.0.0.1:26657",
@@ -17,15 +17,33 @@ const start = async () => {
             {prefix: "cosmos"}
         );
 
-        const nftLink: NftLink = {type: "http", url: "xxx.xxx"};
-        const nftImage: NftImage = {type: "http", url: "xxx.xxx"};
+        const ID = "id1";
+
+        const a = await sdk.mdbModule.createNftCollection(
+            signer,
+            {
+                id: ID,
+                name: "test1",
+                description: "test1",
+                category: "music",
+                url: "http://xxx.yyy",
+                images: [{
+                    type: "x",
+                    url: "http://xxx.zzz"
+                }]
+            })
+
+        console.log(a.transactionHash)
+        const nftLink: NftLink = {type: "http", url: "http://xxx.xxx"};
+        const nftImage: NftImage = {type: "http", url: "http://xxx.xxx"};
         const nftAttribute: NftAttribute = {
             type: "string",
             value: "bob's nft",
             subValue: "bob's nft"
         };
+
         const nftMetadata: MsgNftMetadata = {
-            id: "0",
+            id: ID,
             title: "bob",
             images: [nftImage],
             url: "http://xxx.xxx",
@@ -36,18 +54,25 @@ const start = async () => {
         };
 
         const nftss: MsgNftsMetadata = {
-            nfts: [nftMetadata],
+            nfts: [nftMetadata]
         };
 
         console.log(nftss.nfts.length)
 
-        const a = await sdk.mdbModule.mintNfts(
+        const b = await sdk.mdbModule.mintNfts(
             signer,
-            "",
+            ID,
             nftss
         )
 
-        console.log(a.transactionHash)
+        console.log(b.transactionHash)
+        const [acc] = await signer.getAccounts();
+        const c = await sdk.mdbModule.getNftCollection(acc.address, "id14")
+        console.log(c)
+
+
+        const d = await sdk.mdbModule.getNftCollections(acc.address);
+        console.log(d)
     } catch (e) {
         console.error(e)
     }
